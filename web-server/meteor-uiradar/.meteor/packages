@@ -21,3 +21,4 @@ ejson
 spacebars
 check
 d3js:d3
+hashanp:colorbrewer@=1.0.0

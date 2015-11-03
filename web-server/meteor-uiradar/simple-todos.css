@@ -24,6 +24,10 @@ body {
   background: white;
 }
 
+svg {
+  margin: 10 auto;
+}
+
 header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
@@ -41,6 +45,10 @@ h1 {
   margin-bottom: 10px;
   display: inline-block;
   margin-right: 1em;
+}
+
+h4 {
+  margin: 15 auto;
 }
 
 form {

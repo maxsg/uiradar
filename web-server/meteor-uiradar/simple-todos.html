@@ -8,6 +8,7 @@
       <!-- <h1>Devices ({{incompleteCount}})</h1> -->
       <h1>Device (id: {{deviceId}})</h1>
       <h3>{{trajectoryCount}} coordinates total</h3>
+      <h3>{{recentTrajectoryCount}} coordinates in the last {{timeDuration}} seconds</h3>
 
       <!-- <label class="hide-completed">
         <input type="checkbox" checked="{{hideCompleted}}" />
@@ -56,14 +57,14 @@
   </li>
 </template> -->
 <template name="xytrajectoryPlot">
-  <h4>x-y Trajectory Plot</h4>
-  <svg id="xytrajectoryPlot">
+<!--   <h4>x-y Trajectory Plot</h4>
+ -->  <svg id="xytrajectoryPlot">
   </svg>
 </template>
 
 <template name="ztrajectoryPlot">
-  <h4>z Trajectory Plot</h4>
-  <svg id="ztrajectoryPlot">
+<!--   <h4>z Trajectory Plot</h4>
+ -->  <svg id="ztrajectoryPlot">
   </svg>
 </template>
 
