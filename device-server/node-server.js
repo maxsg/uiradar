@@ -58,12 +58,14 @@ var ymax = 10.0;
 var zmin = 0.0;
 var zmax = 2.0;
 
+
 // trajectory data offset=41600 and size=12
 // num_dev offset=41612 and size=4
 // file_name offset=41624 and size=7
 // time offset=41616 and size=8
 // timestamp offset=41632 and size=8
 // Chunk size: 41640
+
 
 
 
@@ -115,7 +117,7 @@ app.get('/', function (req, res) {
 //   // });
 
 //   // ws.on('close', function() {
-//   // 	console.log("closing client #%d", thisId);
+//   //   console.log("closing client #%d", thisId);
 //   // });
  
 //   // ws.send('something');
@@ -254,11 +256,11 @@ var options = {
 };
 
 function checkBufferContains(currentByteOffset, memberByteOffset, memberSize, bytes) {
-	if ((currentByteOffset<=memberByteOffset) && (currentByteOffset+bytes > memberByteOffset)) {  		
-  		if (currentByteOffset+bytes > memberByteOffset+memberSize) {
-  			console.log("bystream contains member");
-  		}
-  	}
+  if ((currentByteOffset<=memberByteOffset) && (currentByteOffset+bytes > memberByteOffset)) {      
+      if (currentByteOffset+bytes > memberByteOffset+memberSize) {
+        console.log("bystream contains member");
+      }
+    }
 }
 
 function readBufferData(data, Trajectory, callback) {
@@ -340,10 +342,7 @@ var server = tls.createServer(options, function(socket) {
 
 
 
-    // var chunkInProgress = true;
-    socket.addListener("error", function (err) {
-        console.log("socket error", err);
-    });
+    // var chunkInProgress = true; q
 
     socket.addListener("data", function (data) {
       
@@ -393,17 +392,17 @@ var server = tls.createServer(options, function(socket) {
       byteoffset = byteoffset % chunk_size;
 
       if (byteoffset == 0) {
-        // console.log(counter);
         var timestamp = "" + new Date().getTime();
         trajectoryObj.timestamp = timestamp;        
-        console.log(trajectoryObj);
-        console.log();
+        // console.log();
+        // console.log(trajectoryObj);
 
         // TODO: use timestamp from device instead of setting it here
 
         var trajectoryDoc = new Trajectory({ device_id: trajectoryObj.deviceId, x: trajectoryObj.x, y: trajectoryObj.y, z: trajectoryObj.z, timestamp: trajectoryObj.timestamp});
         trajectoryDoc.save(function(err, trajectoryDoc) {
           if (err) return console.log(err);
+          console.log();
           console.log("saved successfully:", trajectoryDoc);
             // updateByteOffset(bytes);
         });
@@ -423,26 +422,35 @@ var server = tls.createServer(options, function(socket) {
   // });
 
   
-  // if (db === null) {
-  //   console.log("error connecting to db.");
-  //   console.log("closing socket.");
-  //   soocket.close();
-  // }
-  
   // if (!socket.authorized) {
   //   console.log("socket unauthorized");
   //   console.log(socket.authorizationError);
   // }
  
-  socket.pipe(socket);
+  // socket.pipe(socket);
+
   socket.addListener('close', function (callback) {
-    console.log("socket connectiong closing");
-  })
+    console.log("socket connection closing");
+  });
+
   socket.addListener('clientError', function (err, tlssocket) {
     console.log("client error:", err);
-  })
+  });
+
+  socket.addListener('error', function (err) {
+    console.log("server error:", err);
+  });
 
 });
+
+// var io = require('socket.io')(server);
+
+// io.on('connection', function (socket) {
+//   console.log("socket connection");
+//   socket.on('data', function (data) {
+//     console.log("received data of size", data.length);
+//   })
+// })
 
 server.listen(port, function() {
   console.log('server bound and listening on port', port);

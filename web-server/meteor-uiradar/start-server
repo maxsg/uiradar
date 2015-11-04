@@ -1,0 +1,1 @@
+sudo env PORT=80 MONGO_URL=mongodb://127.0.0.1:27017/uiradar ROOT_URL=http://ec2-52-91-254-163.compute-1.amazonaws.com node bundle/main.js
