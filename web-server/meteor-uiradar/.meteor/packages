@@ -22,3 +22,5 @@ spacebars
 check
 d3js:d3
 hashanp:colorbrewer@=1.0.0
+iron:router
+twbs:bootstrap
