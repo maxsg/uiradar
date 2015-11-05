@@ -1,4 +1,4 @@
-Meteor.subscribe("trajectories");
+Meteor.subscribe("trajectories-recent");
 
 Template.appBody.helpers({
 	trajectories: function() {

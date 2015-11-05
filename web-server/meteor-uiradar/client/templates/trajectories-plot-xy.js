@@ -111,7 +111,8 @@ Template.trajectoriesPlotXy.rendered = function(){
 			// 														$gt: new Date().getTime() - 1000 * 60 * .5	// get only data from 30secs ago
 			// 													}}, 
 			// 													{sort: {timestamp: -1}});
-			var dataset = Trajectories.find({device_id: 100}).fetch();
+			// var dataset = Trajectories.find({device_id: 100}, {sort: {timestamp: -1}}).limit(20).fetch();
+			var dataset = Trajectories.find({}).fetch();
 
 			// var dataset = Trajectories.find().sort({timestamp:-1}).limit(10).fetch();
 			
@@ -146,9 +147,9 @@ Template.trajectoriesPlotXy.rendered = function(){
 				.attr("cy", yMap)
 				.attr("x", xValue)
 				.attr("y", yValue)
-				.attr("r", 8)
+				.attr("r", 4)
 				// .attr("fill", function(d) { return "rgb(0,0," + + ")"; })
-				.attr("fill", function(d) { return "red"; })
+				.attr("fill", function(d) { return "rgb(200,0,50)"; })
 				// .attr("fill", function(d) { return o(d.timestamp); })
 				// .attr("fill-opacity", function(d) { return d.timestamp; })
 				// .attr("fill-opacity", function(d) { return opacity(d.timestamp); })
@@ -159,12 +160,18 @@ Template.trajectoriesPlotXy.rendered = function(){
 			circles
 				.transition()
 				.duration(3000)
+				.transition()
+				.duration(1000)
+				.attr("fill", function() { return "rgb(50,0,200)"; })
+				.attr("fill-opacity", function() { return 0.0; })
+				.remove();
+
 				// .attr("fill", function() { return "blue"; })
 				// .transition()
 				// .duration(2000)
 				// .attr()
-				.attr("fill-opacity", function() { return 0.0; })
-				.remove();
+				// .attr("fill-opacity", function() { return 0.0; });
+				// .remove();
 				// .attr("fill", function)
 				// .attr("cx", function(d) {
 				// 	return xScale(d.x);
@@ -176,6 +183,10 @@ Template.trajectoriesPlotXy.rendered = function(){
 			//Remove
 			circles
 				.exit()
+				.transition()
+				.duration(1000)
+				.attr("fill", function() { return "rgb(50,0,200)"; })
+				.attr("fill-opacity", function() { return 0.0; })
 				.remove();
 		});
 };

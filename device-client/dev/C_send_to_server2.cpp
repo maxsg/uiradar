@@ -62,7 +62,7 @@ int main()
     int y=1;
     int z=2;
 
-    int batch_size = 100;
+    int batch_size = 5000;
 
     int run_duration = 5;
     time_t stop = time(0) + run_duration;
@@ -79,8 +79,8 @@ int main()
         float x_value = -5.0;
 
         for(unsigned int j = 0; j < batch_size; j++) {  
-            usleep(75000);
-            // usleep(10000);
+            // usleep(75000);
+            usleep(4000);
             boost::posix_time::ptime t1 = boost::posix_time::microsec_clock::universal_time();
 
             // for(unsigned int i = 0; i < 3; i++){

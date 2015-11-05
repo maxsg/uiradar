@@ -31,6 +31,9 @@ Router.route('/', function() {
 	this.render('appBody');
 });
 
+Router.route('join');
+Router.route('signin');
+
 // Router.route('trajectoriesPlotXy');
 // Router.route('trajectoriesPlotZ');
 
